@@ -1,0 +1,5 @@
+Write a single tweet (<=240 chars) based on the idea below. Keep it original, avoid copying phrases, and be concise.
+
+Title: {title}
+Summary: {summary}
+Source URL: {url}

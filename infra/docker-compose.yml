@@ -1,0 +1,76 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: signalforge
+      POSTGRES_USER: signalforge
+      POSTGRES_PASSWORD: signalforge
+    ports:
+      - "5440:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6380:6379"
+
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://signalforge:signalforge@postgres:5432/signalforge
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: dev-secret
+      FERNET_KEY: dev-fernet-key
+      POSTING_DISABLED: "false"
+      PYTHONPATH: /app
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "8010:8000"
+
+  worker:
+    build:
+      context: ..
+      dockerfile: workers/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://signalforge:signalforge@postgres:5432/signalforge
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: dev-secret
+      FERNET_KEY: dev-fernet-key
+      POSTING_DISABLED: "false"
+      PYTHONPATH: /app
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres
+      - redis
+    command: ["celery", "-A", "celery_app.celery_app", "worker", "-l", "info"]
+
+  beat:
+    build:
+      context: ..
+      dockerfile: workers/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://signalforge:signalforge@postgres:5432/signalforge
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: dev-secret
+      FERNET_KEY: dev-fernet-key
+      POSTING_DISABLED: "false"
+      PYTHONPATH: /app
+    env_file:
+      - ../.env
+    depends_on:
+      - postgres
+      - redis
+    command: ["celery", "-A", "celery_app.celery_app", "beat", "-l", "info"]
+
+volumes:
+  postgres_data:

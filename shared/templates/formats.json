@@ -1,0 +1,20 @@
+{
+  "tweet_single": {
+    "max_chars": 240,
+    "is_thread": false,
+    "thread_count": 1,
+    "prompt": "tweet_single.txt"
+  },
+  "tweet_hook_payoff": {
+    "max_chars": 240,
+    "is_thread": false,
+    "thread_count": 1,
+    "prompt": "tweet_hook_payoff.txt"
+  },
+  "thread_5": {
+    "max_chars": 260,
+    "is_thread": true,
+    "thread_count": 5,
+    "prompt": "thread_5.txt"
+  }
+}

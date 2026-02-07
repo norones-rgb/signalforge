@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "signalforge-workers"
+version = "0.1.0"
+description = "SignalForge workers"
+requires-python = ">=3.11"
+dependencies = [
+    "celery>=5.4",
+    "redis>=5.0",
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.1",
+    "pydantic-settings>=2.2",
+    "feedparser>=6.0",
+    "openai>=1.0",
+]
+
+[tool.setuptools]
+packages = ["tasks"]
+py-modules = ["celery_app"]
+

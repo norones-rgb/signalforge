@@ -1,0 +1,5 @@
+Write a hook + payoff tweet (<=240 chars). Hook should be curiosity-driven, payoff should be a clear takeaway.
+
+Title: {title}
+Summary: {summary}
+Source URL: {url}

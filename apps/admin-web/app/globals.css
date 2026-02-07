@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-fog text-ink;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), system-ui, -apple-system, sans-serif;
+}
+
+.surface {
+  @apply bg-white/80 backdrop-blur border border-white/60 rounded-2xl shadow-glow;
+}
+
+.label {
+  @apply text-xs uppercase tracking-[0.2em] text-slate/70;
+}
+
+.input {
+  @apply w-full rounded-xl border border-slate/20 bg-white px-4 py-3 text-sm shadow-sm focus:border-accent focus:outline-none;
+}
+
+.button {
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold transition;
+}
+
+.button-primary {
+  @apply button bg-ink text-white hover:bg-slate;
+}
+
+.button-accent {
+  @apply button bg-accent text-ink hover:bg-[#f55f00];
+}
+
+.button-ghost {
+  @apply button border border-slate/30 text-slate hover:border-slate hover:text-ink;
+}

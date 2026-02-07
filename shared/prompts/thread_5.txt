@@ -1,0 +1,5 @@
+Create a 5-tweet thread (each <=260 chars) based on the idea. Return numbered tweets.
+
+Title: {title}
+Summary: {summary}
+Source URL: {url}
