@@ -7,11 +7,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 COPY apps/api/pyproject.toml /app/pyproject.toml
 COPY apps/api/alembic.ini /app/alembic.ini
+COPY apps/api/start.sh /app/start.sh
 COPY apps/api/app /app/app
 
 RUN pip install --no-cache-dir -U pip \
-    && pip install --no-cache-dir .
+    && pip install --no-cache-dir . \
+    && chmod +x /app/start.sh
 
 EXPOSE 8000
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/app/start.sh"]
